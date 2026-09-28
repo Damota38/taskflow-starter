@@ -9,7 +9,6 @@ node_modules/
 npm-debug.log*
 
 # Fichiers d'éditeur / système
-.vscode/
 .DS_Store
 Thumbs.db
 
