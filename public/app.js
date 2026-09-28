@@ -30,7 +30,7 @@ async function loadTasks() {
 }
 
 // ── Rendu des tâches ───────────────────────────
-// ⚠️ Utilise innerHTML — vulnérable au XSS stocké (pour TP sécurité)
+//   Utilise innerHTML — vulnérable au XSS stocké (pour TP sécurité)
 
 function renderTasks(tasks) {
   if (tasks.length === 0) {
