@@ -2,9 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-const PORT = 3000;
-
-const SECRET_KEY = "ma-super-cle-secrete-2026";
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -100,11 +98,9 @@ app.patch("/api/tasks/:id", (req, res) => {
 
   const validStatuses = ["todo", "in-progress", "done"];
   if (status && !validStatuses.includes(status)) {
-    return res
-      .status(400)
-      .json({
-        error: "Statut invalide. Valeurs acceptées : todo, in-progress, done",
-      });
+    return res.status(400).json({
+      error: "Statut invalide. Valeurs acceptées : todo, in-progress, done",
+    });
   }
 
   if (status) task.status = status;
@@ -147,7 +143,10 @@ app.get("/search", (req, res) => {
 // ──────────────────────────────────────────────
 // Démarrage du serveur
 // ──────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`TaskFlow démarré sur http://localhost:${PORT}`);
-  console.log(`Secret : ${SECRET_KEY}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`TaskFlow démarré sur http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
